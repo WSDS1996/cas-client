@@ -13,6 +13,9 @@ export type AppListType = Array<{
   token: string;
   domain: string;
   desc: string;
+  isDebug: boolean;
+  isEnable: boolean;
+  whitelistIp: string;
   expire: string;
 }>;
 
@@ -43,7 +46,9 @@ export default function AppList() {
   }, []);
 
   const handleDelete = (token: string) => {
-    http('delete', '/application/remove', { token }).then((res) => {
+    console.log(token);
+    
+    http('delete', `/application/remove/${token}`).then((res) => {
       if (res.code === 0) {
         setList((prev) => {
           return prev?.filter((item) => item.token !== token);
@@ -68,6 +73,9 @@ export default function AppList() {
             <HeadCell>Token</HeadCell>
             <HeadCell>Domain</HeadCell>
             <HeadCell>Description</HeadCell>
+            <HeadCell>isDebug</HeadCell>
+            <HeadCell>isEnable</HeadCell>
+            <HeadCell>whitelistIp</HeadCell>
             <HeadCell>Expire</HeadCell>
             <HeadCell align="center">Operation</HeadCell>
           </TableRow>
@@ -84,6 +92,9 @@ export default function AppList() {
                 </a>
               </TableCell>
               <TableCell>{item.desc}</TableCell>
+              <TableCell>{item.isDebug?'调试':'非调试'}</TableCell>
+              <TableCell>{item.isEnable?'启用':'禁用'}</TableCell>
+              <TableCell>{item.whitelistIp}</TableCell>
               <TableCell>{item.expire || '-'}</TableCell>
               <TableCell align="center">
                 <Link onClick={() => handleEdit(item.token)}>Edit</Link>&ensp;

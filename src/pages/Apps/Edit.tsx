@@ -19,6 +19,9 @@ export default function Edit() {
   const [formData, setFormData] = useState<FormDataType>({
     name: '',
     domain: '',
+    isDebug: false,
+    isEnable: false,
+    whitelistIp: '',
     desc: '',
     expire: 0,
   });
@@ -33,6 +36,9 @@ export default function Edit() {
             domain: res.data[0].domain,
             desc: res.data[0].desc,
             expire: dayjs(res.data[0].expire).valueOf(),
+            isDebug: res.data[0].isDebug,
+            isEnable: res.data[0].isEnable,
+            whitelistIp: res.data[0].whitelistIp,
           });
         } else {
           userStore.showAlert(res.message);

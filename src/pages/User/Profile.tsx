@@ -15,7 +15,6 @@ export default function () {
     name: userStore.name,
     email: userStore.email,
     avatar: userStore.avatar,
-    manager: userStore.manager,
     phone: userStore.phone,
     birth: userStore.birth,
     gender: userStore.gender,
@@ -64,15 +63,15 @@ export default function () {
         id="profile-name"
         label="name"
         defaultValue={userStore.name}
-        key={userStore.name}
+        key="profile-name"
         onChange={(e) => updateFormData('name', e.target.value)}
       />
       <TextField
-        disabled={!edit}
+        disabled={true}
         id="profile-email"
         label="email"
         defaultValue={userStore.email}
-        key={userStore.email}
+        key="profile-email"
         onChange={(e) => updateFormData('email', e.target.value)}
       />
       <TextField
@@ -80,27 +79,15 @@ export default function () {
         id="profile-avatar"
         label="avatar"
         defaultValue={userStore.avatar}
-        key={userStore.avatar}
+        key="profile-avatar"
         onChange={(e) => updateFormData('avatar', e.target.value)}
       />
-      <TextField
-        disabled={!edit}
-        select
-        id="profile-manager"
-        label="manager"
-        defaultValue={userStore.manager}
-        key={`${userStore.manager}`}
-        onChange={(e) => updateFormData('manager', e.target.value)}
-      >
-        <MenuItem value="true">true</MenuItem>
-        <MenuItem value="false">false</MenuItem>
-      </TextField>
       <TextField
         disabled={!edit}
         id="profile-phone"
         label="phone"
         defaultValue={userStore.phone}
-        key={userStore.phone}
+        key="profile-phone"
         onChange={(e) => updateFormData('phone', e.target.value)}
       />
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="zh-cn">
@@ -109,7 +96,7 @@ export default function () {
           format="YYYY-MM-DD"
           disabled={!edit}
           defaultValue={dayjs(userStore.birth)}
-          key={userStore.birth}
+          key="birth"
           onAccept={(value) => updateFormData('birth', dayjs(value as Date).format('YYYY-MM-DD'))}
         />
       </LocalizationProvider>
@@ -119,7 +106,7 @@ export default function () {
         select
         label="gender"
         defaultValue={userStore.gender}
-        key={userStore.gender}
+        key="profile-gender"
         onChange={(e) => updateFormData('gender', e.target.value)}
       >
         <MenuItem value="male">male</MenuItem>
